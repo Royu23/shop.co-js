@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
  <style type="text/tailwindcss"></style>
     <link rel="stylesheet" href="login.css">
+    
 </head>
 <body>
     <div class="bg-blue-400 h-screen main-container ">
@@ -54,17 +55,21 @@
     const password=passwords.value
     console.log(username)
     console.log(password)
-   if(username=="emylis"&& password=="emylispass"){
-   result();
-   }
-   
+    result(username,password);
    })
+
   const result=(username,password)=>{
-    axios.post('https://dummyjson.com/auth/login',{username,password})
-  .then((response) => console.log(response))
-  .catch((error) => console.error(error));
-  }
-    </script>
+    axios.post('https://dummyjson.com/auth/login',{username:username,
+    password:password })
+  .then((response) => {console.log(response)
+        if(response.data.accessToken){
+        window.location.href="index.html"
+        }
+        else{
+        alert("invalid")
+        }})
+       }
+</script>
 
     
 </body>
